@@ -320,3 +320,42 @@ function initMap() {
         title: "53 Hayward Ave St. John's, NL A1C 3W6"
     });
 }
+
+/**********************************************************************/
+/* GMAIL */
+/**********************************************************************/
+// Client ID and API key from the Developer Console
+var CLIENT_ID = '511094256688-s1e1vfagqqui4jctijh81dukf0n1glit.apps.googleusercontent.com';
+var API_KEY = 'FYDSy8EK74vNgl_oDh000ayz';
+
+// Array of API discovery doc URLs for APIs used by the quickstart
+var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
+
+// Authorization scopes required by the API; multiple scopes can be
+// included, separated by spaces.
+var SCOPES = 'https://www.googleapis.com/auth/gmail.send';
+
+// On load, called to load the auth2 library and API client library.
+function handleClientLoad() {
+    gapi.load('client:auth2', initClient);
+}
+
+// Initializes the API client library and sets up sign-in state listeners.
+function initClient() {
+    gapi.client.init({
+        apiKey: API_KEY,
+        clientId: CLIENT_ID,
+        discoveryDocs: DISCOVERY_DOCS,
+        scope: SCOPES
+    }).then(function () {
+        // Listen for sign-in state changes.
+        gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
+        
+        // Handle the initial sign-in state.
+        updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+        authorizeButton.onclick = handleAuthClick;
+        signoutButton.onclick = handleSignoutClick;
+    }, function(error) {
+        appendPre(JSON.stringify(error, null, 2));
+    });
+}
