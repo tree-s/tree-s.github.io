@@ -346,6 +346,8 @@ function initClient() {
         clientId: CLIENT_ID,
         discoveryDocs: DISCOVERY_DOCS,
         scope: SCOPES
+    }).then(function () {
+        console.log("GAPI Load success!");
     }, function(error) {
         console.log(JSON.stringify(error, null, 2));
     });
