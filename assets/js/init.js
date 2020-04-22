@@ -69,21 +69,25 @@ $(document).ready(function() {
         var name = $("#name").val();
         var email = $("#email").val();
         var subject = "Resume Inquiry";
-        var message = $("#message").val();
+        var body = $("#message").val();
+        
+        var message = name + email + subject + body;
+        
+        // The body needs to be base64url encoded.
+        const encodedMessage = btoa(message)
 
-        $.ajax({
-            type: "POST",
-            url: "https://script.google.com/macros/s/AKfycbwpGkT-G_n3amhnNDpMC3GEMIs3Cbsnfzhw--nf8EmjP885OA/exec",
-            data: "name=" + name + "&email=" + email + "&message=" + message + "&subject=" + subject,
-            success: function(text) {
-                if (text == "success") {
-                    formSuccess();
-                } else {
-                    formError();
-                    submitMSG(false, text);
-                }
-                initMap();
+        const reallyEncodedMessage = encodedMessage.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+
+        gapi.client.gmail.users.messages.send({
+            userId: 'me',
+            resource: {
+                raw: reallyEncodedMessage
             }
+        }).then(function () {
+            formSuccess();
+        }, function(error) {
+            formError();
+            submitMSG(false, JSON.stringify(error, null, 2));
         });
     }
 
