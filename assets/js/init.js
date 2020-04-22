@@ -87,7 +87,7 @@ $(document).ready(function() {
             formSuccess();
         }, function(error) {
             formError();
-            submitMSG(false, "Message Sent!");
+            submitMSG(false, "Message Not Sent!");
             console.log(JSON.stringify(error, null, 2));            
         });
     }
