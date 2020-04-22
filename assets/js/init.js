@@ -356,6 +356,6 @@ function initClient() {
         authorizeButton.onclick = handleAuthClick;
         signoutButton.onclick = handleSignoutClick;
     }, function(error) {
-        appendPre(JSON.stringify(error, null, 2));
+        submitMSG(false, JSON.stringify(error, null, 2));
     });
 }
