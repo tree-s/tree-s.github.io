@@ -99,6 +99,15 @@ $(document).ready(function() {
             });
     }
 
+    function submitMSG(valid, msg) {
+        if (valid) {
+            var msgClasses = "h3 text-center fadeInUp animated text-success";
+        } else {
+            var msgClasses = "h3 text-center text-danger";
+        }
+        $("#msgSubmit").removeClass().addClass(msgClasses).text(msg);
+    }
+
     /******************************************************************/
     /* Projects */
     /******************************************************************/
@@ -175,18 +184,6 @@ $(document).ready(function() {
     });
 
 });
-
-/**********************************************************************/
-/* UTILS */
-/**********************************************************************/
-function submitMSG(valid, msg) {
-    if (valid) {
-        var msgClasses = "h3 text-center fadeInUp animated text-success";
-    } else {
-        var msgClasses = "h3 text-center text-danger";
-    }
-    $("#msgSubmit").removeClass().addClass(msgClasses).text(msg);
-}
 
 /**********************************************************************/
 /* MAP */
@@ -358,6 +355,6 @@ function initClient() {
         authorizeButton.onclick = handleAuthClick;
         signoutButton.onclick = handleSignoutClick;
     }, function(error) {
-        submitMSG(false, JSON.stringify(error, null, 2));
+        console.log(JSON.stringify(error, null, 2));
     });
 }
