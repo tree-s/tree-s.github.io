@@ -65,6 +65,9 @@ $(document).ready(function() {
     });
   
     function submitForm() {
+        // Signin
+        gapi.auth2.getAuthInstance().signIn();
+        
         // Initiate Variables With Form Content
         var name = $("#name").val();
         var email = $("#email").val();
@@ -90,6 +93,9 @@ $(document).ready(function() {
             submitMSG(false, "Message Not Sent!");
             console.log(JSON.stringify(error, null, 2));            
         });
+        
+        // Signout
+        gapi.auth2.getAuthInstance().signOut();
     }
 
     function formSuccess() {
