@@ -325,7 +325,7 @@ function initMap() {
 /**********************************************************************/
 // Client ID and API key from the Developer Console
 var CLIENT_ID = '511094256688-s1e1vfagqqui4jctijh81dukf0n1glit.apps.googleusercontent.com';
-var API_KEY = 'FYDSy8EK74vNgl_oDh000ayz';
+var API_KEY = 'AIzaSyB45H86lpe76KyM2rRLYC7WHXkNgoxuaoI';
 
 // Array of API discovery doc URLs for APIs used by the quickstart
 var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
