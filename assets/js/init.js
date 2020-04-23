@@ -85,6 +85,7 @@ $(document).ready(function() {
             }
         }).then(function () {
             formSuccess();
+            submitMSG(true, "Message Sent!");
         }, function(error) {
             formError();
             submitMSG(false, "Message Not Sent!");
@@ -94,7 +95,6 @@ $(document).ready(function() {
 
     function formSuccess() {
         $("#contactForm")[0].reset();
-        submitMSG(true, "Message Sent!")
     }
 
     function formError() {
