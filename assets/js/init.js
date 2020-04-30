@@ -67,30 +67,11 @@ $(document).ready(function() {
     function submitForm() {
         // Initiate Variables With Form Content
         var name = $("#name").val();
-        var email = $("#email").val();
-        var subject = "Resume Inquiry";
-        var body = $("#message").val();
+        var email = "mailto:" + $("#email").val();
+        var subject = "subject=" + "Resume Inquiry";
+        var message = "body=" + name + $("#message").val();
         
-        var message = name + email + subject + body;
-        
-        // The body needs to be base64url encoded.
-        const encodedMessage = btoa(message)
-
-        const reallyEncodedMessage = encodedMessage.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
-
-        gapi.client.gmail.users.messages.send({
-            userId: 'me',
-            resource: {
-                raw: reallyEncodedMessage
-            }
-        }).then(function () {
-            formSuccess();
-            submitMSG(true, "Message Sent!");
-        }, function(error) {
-            formError();
-            submitMSG(false, "Message Not Sent!");
-            console.log(JSON.stringify(error, null, 2));            
-        });
+        window.open( email + '?' + subject + '&' + message );
     }
 
     function formSuccess() {
@@ -322,38 +303,5 @@ function initMap() {
         position: new google.maps.LatLng(47.5695282, -52.7127618),
         map: map,
         title: "53 Hayward Ave St. John's, NL A1C 3W6"
-    });
-}
-
-/**********************************************************************/
-/* GMAIL */
-/**********************************************************************/
-// Client ID and API key from the Developer Console
-var CLIENT_ID = '511094256688-s1e1vfagqqui4jctijh81dukf0n1glit.apps.googleusercontent.com';
-var API_KEY = 'AIzaSyB45H86lpe76KyM2rRLYC7WHXkNgoxuaoI';
-
-// Array of API discovery doc URLs for APIs used by the quickstart
-var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"];
-
-// Authorization scopes required by the API; multiple scopes can be
-// included, separated by spaces.
-var SCOPES = 'https://www.googleapis.com/auth/gmail.send';
-
-// On load, called to load the auth2 library and API client library.
-function handleClientLoad() {
-    gapi.load('client:auth2', initClient);
-}
-
-// Initializes the API client library and sets up sign-in state listeners.
-function initClient() {
-    gapi.client.init({
-        apiKey: API_KEY,
-        clientId: CLIENT_ID,
-        discoveryDocs: DISCOVERY_DOCS,
-        scope: SCOPES
-    }).then(function () {
-        console.log("GAPI Load success!");
-    }, function(error) {
-        console.log(JSON.stringify(error, null, 2));
     });
 }
