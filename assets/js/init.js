@@ -71,7 +71,26 @@ $(document).ready(function() {
         var subject = "subject=" + "Resume Inquiry";
         var message = "body=" + name + $("#message").val();
         
-        window.open( email + '?' + subject + '&' + message );
+        // Initiate Variables With Form Content
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var subject = "Resume Inquiry";
+        var message = $("#message").val();
+
+        $.ajax({
+            type: "POST",
+            url: "https://script.google.com/macros/s/AKfycbwpGkT-G_n3amhnNDpMC3GEMIs3Cbsnfzhw--nf8EmjP885OA/exec",
+            data: "name=" + name + "&email=" + email + "&message=" + message + "&subject=" + subject,
+            success: function(text) {
+                if (text == "success") {
+                    formSuccess();
+                } else {
+                    formError();
+                    submitMSG(false, text);
+                }
+                initMap();
+            }
+        });
     }
 
     function formSuccess() {
