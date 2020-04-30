@@ -84,6 +84,7 @@ $(document).ready(function() {
             success: function(text) {
                 if (text == "success") {
                     formSuccess();
+                    submitMSG(true, text);
                 } else {
                     formError();
                     submitMSG(false, text);
