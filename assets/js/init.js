@@ -80,7 +80,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: "https://script.google.com/macros/s/AKfycbwpGkT-G_n3amhnNDpMC3GEMIs3Cbsnfzhw--nf8EmjP885OA/exec",
-            data: "name=" + name + "&email=" + email + "&message=" + message + "&subject=" + subject + "&callback=?",
+            data: "name=" + name + "&email=" + email + "&message=" + message + "&subject=" + subject,
             success: function(text) {
                 if (text == "success") {
                     formSuccess();
