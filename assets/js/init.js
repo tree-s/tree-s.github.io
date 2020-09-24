@@ -84,10 +84,10 @@ $(document).ready(function() {
             success: function(text) {
                 if (text == "success") {
                     formSuccess();
-                    submitMSG(true, text);
+                    submitMSG(true, "Success!");
                 } else {
                     formError();
-                    submitMSG(false, text);
+                    submitMSG(false, "An error occurred, please try again later.");
                 }
                 initMap();
             }
